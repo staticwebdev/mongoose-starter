@@ -9,8 +9,3 @@ This project is designed to be a starter [Azure Static Web Apps](https://docs.mi
   - Vanilla JavaScript
   - Mongoose
   - Azure Functions
-
-## Getting started
-
-- Use the [tutorial](link) to create the resources for the project
-- Update the code for your purposes
