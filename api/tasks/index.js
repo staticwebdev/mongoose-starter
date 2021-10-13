@@ -1,30 +1,11 @@
-// Load mongoose
-const mongoose = require('mongoose');
 
-// Connect to the database
-mongoose.connect(
-    process.env.CONNECTION_STRING, // Retrieve connection string
-    { // boiler plate values
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    }
-);
-
-// Create the schema or structure of our object in Mongoose
-const taskSchema = new mongoose.Schema({
-    title: String, // Add title property of type string
-    completed: { // Add completed property
-        type: Boolean, // Set type to boolean
-        default: false // Set default to false
-    }
-});
-
-// Create a model using our schema
-// This model will be used to access the database
-const TaskModel = mongoose.model('task', taskSchema);
+const store = require('../store.js');
 
 // Export our function
 module.exports = async function (context, req) {
+    // Get the current user
+    const userId = getUserId(req);
+
     // setup our default content type (we always return JSON)
     context.res = {
         header: {
@@ -32,37 +13,54 @@ module.exports = async function (context, req) {
         }
     }
 
+    // Connect to the database
+    await store.connect();
+
     // Read the method and determine the requested action
     switch (req.method) {
         // If get, return all tasks
         case 'GET':
-            await getTasks(context);
+            await getTasks(context, userId);
             break;
         // If post, create new task
         case 'POST':
-            await createTask(context);
+            await createTask(context, userId);
             break;
         // If put, update task
         case 'PUT':
-            await updateTask(context);
+            await updateTask(context, userId);
             break;
     }
 };
 
+// Get current user
+function getUserId(req) {
+    // Retrieve client info from request header
+    const header = req.headers['x-ms-client-principal'];
+    // The header is encoded in Base64, so we need to convert it
+    const encoded = Buffer.from(header, 'base64');
+    // Convert from Base64 to ascii
+    const decoded = encoded.toString('ascii');
+    // Convert to a JSON object and return the userId
+    return JSON.parse(decoded).userId;
+}
+
 // Return all tasks
-async function getTasks(context) {
-    // load all tasks from database
-    const tasks = await TaskModel.find();
+async function getTasks(context, userId) {
+    // load all tasks from database filtered by userId
+    const tasks = await store.getAll(userId);
     // return all tasks
     context.res.body = { tasks: tasks };
 }
 
 // Create new task
-async function createTask(context) {
+async function createTask(context, userId) {
     // Read the uploaded task
-    const body = context.req.body;
+    const newTask = context.req.body;
+    // Add the userId
+    newTask.userId = userId;
     // Save to database
-    const task = await TaskModel.create(body);
+    const task = await store.create(newTask);
     // Set the HTTP status to created
     context.res.status = 201;
     // return new object
@@ -70,13 +68,15 @@ async function createTask(context) {
 }
 
 // Update an existing function
-async function updateTask(context) {
+async function updateTask(context, userId) {
     // Grab the id from the URL (stored in bindingData)
     const id = context.bindingData.id;
     // Get the task from the body
     const task = context.req.body;
+    // Add the userId
+    task.userId = userId;
     // Update the item in the database
-    const result = await TaskModel.updateOne({ _id: id }, task);
+    const result = await store.update(id, task);
     // Check to ensure an item was modified
     if (result.nModified === 1) {
         // Updated an item, status 204 (empty update)

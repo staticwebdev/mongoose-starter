@@ -6,8 +6,40 @@ const tasks = [];
 
 // entry function
 async function main() {
-    await loadTasks();
+    await initialLoad();
     displayTasks();
+}
+
+async function initialLoad() {
+    // Get the current user from the server
+    const user = await getUser();
+
+    // Get the user display on the page
+    const userDisplay = document.getElementById('user-display');
+    if(user) {
+        // User is logged on
+        // Display welcome message
+        userDisplay.innerText = `Welcome, ${user.username}!`;
+        // Display tasks
+        document.getElementById('tasks-display').classList.remove('hidden');
+        // Load tasks from server
+        await loadTasks();
+    } else {
+        // User is not logged in
+        // Update user display to allow for login
+        userDisplay.innerHTML = '<a href="/.auth/login/github">Please login to see your list of tasks</a>';
+    }
+}
+
+// Retrieves current user from Azure Static Web Apps
+async function getUser() {
+    // Retrieve response from /.auth/me
+    const response = await fetch('/.auth/me');
+    // Convert to JSON
+    const payload = await response.json();
+    // Retrieve the clientPrincipal (current user)
+    const { clientPrincipal } = payload;
+    return clientPrincipal;
 }
 
 // Calls server to retrieve all tasks
@@ -110,9 +142,12 @@ async function updateTask(e) {
 
 // Event listener for new tasks being created
 document.getElementById('task-register').addEventListener('click', async () => {
+    // Retrieve textbox
+
+    const textbox = document.getElementById('task-title');
     // Create task by retrieving text from textbox
     const task = {
-        title: document.getElementById('task-title').value
+        title: textbox.value
     };
     // Call server
     const response = await fetch(
@@ -132,4 +167,9 @@ document.getElementById('task-register').addEventListener('click', async () => {
     tasks.push(loadedTask);
     // Add the new task to the display
     addTaskToDisplay(loadedTask);
+
+    // Clear the textbox
+    textbox.value = '';
+    // Set focus back on the textbox
+    textbox.focus();
 });

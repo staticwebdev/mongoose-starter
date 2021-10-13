@@ -14,15 +14,22 @@
 <body>
     <article>
         <h1>My tasks</h1>
-        <!-- List for tasks -->
-        <ul id="task-list"></ul>
 
-        <div>
-            <label for="name">Title: </label><input type="text" id="task-title" />
-        </div>
-        <div>
-            <button type="button" id="task-register">Add task</button>
-        </div>
+        <section id="user-display">
+            Loading... Please wait...
+        </section>
+
+        <section id="tasks-display" class="hidden">
+            <!-- List for tasks -->
+            <ul id="task-list"></ul>
+
+            <div>
+                <label for="name">Title: </label><input type="text" id="task-title" />
+            </div>
+            <div>
+                <button type="button" id="task-register">Add task</button>
+            </div>
+        </section>
     </article>
     <script src="./local-index.js"></script>
 </body>
