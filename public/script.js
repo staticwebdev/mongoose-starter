@@ -1,13 +1,40 @@
-// run the code
-main();
+// run the code on load
+window.onload = pageLoad;
 
 // stores all tasks
 const tasks = [];
 
-// entry function
-async function main() {
-    await loadTasks();
-    displayTasks();
+async function pageLoad() {
+    // Get the current user from the server
+    const user = await getUser();
+
+    console.log(user);
+    // Get the user display on the page
+    const userDisplay = document.getElementById('user-display');
+    if(user) {
+        // User is logged on
+        // Display welcome message
+        userDisplay.innerText = `Welcome, ${user.userDetails}!`;
+        // Show tasks display element
+        document.getElementById('tasks-display').classList.remove('hidden');
+        // Load tasks from server
+        await loadTasks();
+    } else {
+        // User is not logged in
+        // Update user display to allow for login
+        userDisplay.innerHTML = '<a href="/.auth/login/github">Please login to see your list of tasks</a>';
+    }
+}
+
+// Retrieves current user from Azure Static Web Apps
+async function getUser() {
+    // Retrieve response from /.auth/me
+    const response = await fetch('/.auth/me');
+    // Convert to JSON
+    const payload = await response.json();
+    // Retrieve the clientPrincipal (current user)
+    const { clientPrincipal } = payload;
+    return clientPrincipal;
 }
 
 // Calls server to retrieve all tasks
@@ -30,6 +57,7 @@ async function loadTasks() {
         messageElement.innerHTML = "Could not pull data. Make sure you've <a href='https://github.com/geektrainer/aswa-starter/docs/add-database.md'>configured the database</a>."
         document.getElementById('task-list').appendChild(messageElement);
     }
+    displayTasks();
 }
 
 // Displays all tasks on page (called on load)
@@ -110,9 +138,12 @@ async function updateTask(e) {
 
 // Event listener for new tasks being created
 document.getElementById('task-register').addEventListener('click', async () => {
+    // Retrieve textbox
+
+    const textbox = document.getElementById('task-title');
     // Create task by retrieving text from textbox
     const task = {
-        title: document.getElementById('task-title').value
+        title: textbox.value
     };
     // Call server
     const response = await fetch(
@@ -132,4 +163,9 @@ document.getElementById('task-register').addEventListener('click', async () => {
     tasks.push(loadedTask);
     // Add the new task to the display
     addTaskToDisplay(loadedTask);
+
+    // Clear the textbox
+    textbox.value = '';
+    // Set focus back on the textbox
+    textbox.focus();
 });

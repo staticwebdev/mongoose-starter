@@ -9,5 +9,7 @@
   "dependencies": {
     "mongoose": "^5.10.11"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "mongodb-memory-server": "^7.4.3"
+  }
 }
