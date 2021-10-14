@@ -1,26 +1,21 @@
-// run the code
-main();
+// run the code on load
+window.onload = pageLoad;
 
 // stores all tasks
 const tasks = [];
 
-// entry function
-async function main() {
-    await initialLoad();
-    displayTasks();
-}
-
-async function initialLoad() {
+async function pageLoad() {
     // Get the current user from the server
     const user = await getUser();
 
+    console.log(user);
     // Get the user display on the page
     const userDisplay = document.getElementById('user-display');
     if(user) {
         // User is logged on
         // Display welcome message
-        userDisplay.innerText = `Welcome, ${user.username}!`;
-        // Display tasks
+        userDisplay.innerText = `Welcome, ${user.userDetails}!`;
+        // Show tasks display element
         document.getElementById('tasks-display').classList.remove('hidden');
         // Load tasks from server
         await loadTasks();
@@ -62,6 +57,7 @@ async function loadTasks() {
         messageElement.innerHTML = "Could not pull data. Make sure you've <a href='https://github.com/geektrainer/aswa-starter/docs/add-database.md'>configured the database</a>."
         document.getElementById('task-list').appendChild(messageElement);
     }
+    displayTasks();
 }
 
 // Displays all tasks on page (called on load)

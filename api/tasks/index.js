@@ -6,6 +6,12 @@ module.exports = async function (context, req) {
     // Get the current user
     const userId = getUserId(req);
 
+    // If no current user, return 401
+    if(!userId) {
+        context.res.status = 401;
+        return;
+    }
+
     // setup our default content type (we always return JSON)
     context.res = {
         header: {
