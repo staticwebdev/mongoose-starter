@@ -25,13 +25,13 @@ npm install -g azure-functions-core-tools@3 --unsafe-perm true
   cd <YOUR REPOSITORY NAME>
   ```
 
-1. Open a command or terminal window execute the following code to install the prerequisites
+2. Open a command or terminal window execute the following code to install the prerequisites
 
   ```bash
   npm install
   ```
 
-1. Run the following commands in the terminal window to start the project locally
+3. Run the following commands in the terminal window to start the project locally
 
   ```bash
   npm run dev
