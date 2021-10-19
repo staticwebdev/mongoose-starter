@@ -28,7 +28,7 @@ npm install -g azure-functions-core-tools@3 --unsafe-perm true
 2. Open a command or terminal window execute the following code to install the prerequisites
 
   ```bash
-  npm install
+  npm local:install
   ```
 
 3. Run the following commands in the terminal window to start the project locally
