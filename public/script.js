@@ -54,7 +54,7 @@ async function loadTasks() {
     } catch {
         // If there is an error, display a generic message on the page
         const messageElement = document.createElement('li');
-        messageElement.innerHTML = "Could not pull data. Make sure you've <a href='https://github.com/geektrainer/aswa-starter/docs/add-database.md'>configured the database</a>."
+        messageElement.innerHTML = "Could not pull data. Make sure you've <a href='https://docs.microsoft.com/en-us/azure/static-web-apps/add-mongoose?WT.mc_id=academic-45074-chrhar#configure-database-connection-string'>configured the database</a>."
         document.getElementById('task-list').appendChild(messageElement);
     }
     displayTasks();
