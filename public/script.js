@@ -137,14 +137,17 @@ async function updateTask(e) {
 }
 
 // Event listener for new tasks being created
-document.getElementById('task-register').addEventListener('click', async () => {
-    // Retrieve textbox
+document.getElementById('task-form').addEventListener('submit', async (event) => {
+    // Disable form submission
+    event.preventDefault();
 
+    // Retrieve textbox
     const textbox = document.getElementById('task-title');
     // Create task by retrieving text from textbox
     const task = {
         title: textbox.value
     };
+
     // Call server
     const response = await fetch(
         '/api/tasks', // API location
