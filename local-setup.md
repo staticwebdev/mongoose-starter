@@ -25,18 +25,20 @@ npm install -g azure-functions-core-tools@3 --unsafe-perm true
   cd <YOUR REPOSITORY NAME>
   ```
 
-1. Open a command or terminal window execute the following code to install the prerequisites
+2. Open a command or terminal window execute the following code to install the prerequisites
 
   ```bash
-  npm install
+  npm local:install
   ```
 
-1. Run the following commands in the terminal window to start the project locally
+3. Run the following commands in the terminal window to start the project locally
 
   ```bash
   npm run dev
   ```
 
-Your project will now start!
+  Your project will now start!
+
+4. Navigate to [http://localhost:4280](http://localhost:4280) to use your site
 
 > **IMPORTANT**: Because the development environment uses an in-memory database, any information will be cleared when you restart the server. You can install [MongoDB](https://www.mongodb.com/try/download/community) and add the `CONNECTION_STRING` setting to your [local.settings.json file](https://docs.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=v3%2Cwindows%2Cnode%2Cportal%2Cbash%2Ckeda&WT.mc_id=academic-45074-chrhar#local-settings) to use a local database.

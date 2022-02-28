@@ -5,6 +5,7 @@
   },
   "scripts": {
     "dev": "vite & swa start http://localhost:3000 --api-location api",
-    "postinstall": "cd api && npm install && func init --language javascript --worker-runtime node"
+    "local:install": "npm install && cd api && npm install && func init --language javascript --worker-runtime node",
+    "build": ""
   }
 }
