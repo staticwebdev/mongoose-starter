@@ -23,12 +23,11 @@
             <!-- List for tasks -->
             <ul id="task-list"></ul>
 
-            <div>
-                <label for="name">Title: </label><input type="text" id="task-title" />
-            </div>
-            <div>
-                <button type="button" id="task-register">Add task</button>
-            </div>
+            <form class="form" id="task-form">
+                <label for="name">Title: </label>
+                <input type="text" id="task-title" required />
+                <button type="submit">Add task</button>
+            </form>
         </section>
     </article>
     <script src="./script.js"></script>

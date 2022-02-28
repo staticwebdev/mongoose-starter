@@ -14,3 +14,37 @@ ul {
 .hidden {
     display: none;
 }
+
+article {
+    margin: 3% 5%;
+}
+
+form {
+    display: grid;
+    grid-template-columns: 50px 200px 100px;
+}
+
+button {
+    border-width: 1px;
+    border-radius: 4px;
+    border-style: solid;
+    font-weight: bold;
+    color: white;
+    background-color: blue;
+    margin: 4px;
+    vertical-align: middle;
+}
+
+input {
+    border-width: 1px;
+    border-radius: 4px;
+    border-style: solid;
+    font-weight: bold;
+    padding: 5px;
+    margin: 5px;
+}
+
+label {
+    padding: 5px;
+    margin: 5px;
+}
