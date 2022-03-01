@@ -20,29 +20,41 @@ const TaskModel = mongoose.model('task', taskSchema);
 
 module.exports = {
     // Used to connect to the database
-    connect: async () => {
-        // If connection is already made, return
-        if (mongoose.connection.readyState === 1) return;
+    // log parameter passed from caller, used to log to Azure Functions
+    connect: async (log) => {
+        log('Connecting to database...');
 
-        // If there is no connection string, an in-memory database will be created
-        // This is for development purposes only
-        if (!connectionString) {
-            // Load the mongodb-memory-server library
-            connectionString = await getInMemoryServerUri();
+        // If connection is already made, return
+        if (mongoose.connection.readyState === 1) {
+            log('Connection already established.');
+            return;
         }
 
-        // Connect to the database
-        mongoose.connect(
-            connectionString,
-            { // boiler plate values
-                useNewUrlParser: true,
-                useUnifiedTopology: true,
-            }
-        );
+        // If connectionString is not configured, attempt to connect to localhost MongoDB
+        if (!connectionString) {
+            log('CONNECTION_STRING not configured. Attempting to use localhost.');
+            connectionString = 'mongodb://localhost';
+        }
+
+        try {
+            // Connect to the database
+            mongoose.connect(
+                connectionString,
+                { // boiler plate values
+                    useNewUrlParser: true,
+                    useUnifiedTopology: true,
+                }
+            );
+        } catch(ex) {
+            // Connection unsuccessful
+            // Log error and rethrow
+            log(`Connection unsucessful. Error message: ${ex.message}`);
+            throw ex;
+        }
     },
 
     getAll: async (userId) => {
-        return await TaskModel.find({userId});
+        return await TaskModel.find({ userId });
     },
 
     create: async (task) => {
@@ -52,17 +64,4 @@ module.exports = {
     update: async (id, task) => {
         return await TaskModel.updateOne({ _id: id }, task);
     }
-}
-
-
-// Helper functions
-async function getInMemoryServerUri() {
-    // Load the library
-    const { MongoMemoryServer } = require('mongodb-memory-server');
-
-    // Create the in-memory server
-    const server = await MongoMemoryServer.create();
-
-    // Return the in-memory connection string
-    return server.getUri();
 }

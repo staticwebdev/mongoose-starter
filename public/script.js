@@ -8,7 +8,6 @@ async function pageLoad() {
     // Get the current user from the server
     const user = await getUser();
 
-    console.log(user);
     // Get the user display on the page
     const userDisplay = document.getElementById('user-display');
     if(user) {
