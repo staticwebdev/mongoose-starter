@@ -20,7 +20,7 @@ module.exports = async function (context, req) {
     }
 
     // Connect to the database
-    await store.connect();
+    await store.connect(context.log);
 
     // Read the method and determine the requested action
     switch (req.method) {

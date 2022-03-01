@@ -19,7 +19,7 @@ Please refer to the [documentation](https://docs.microsoft.com/azure/static-web-
 
 ## Local development
 
-You can run the project locally as well by following the [local setup instructions](./local-setup.md).
+You can run the project locally using containers by following the [local setup instructions](./local-setup.md).
 
 ## Project structure
 
