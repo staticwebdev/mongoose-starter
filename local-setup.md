@@ -32,7 +32,7 @@ To run the project, you will need the following:
 1. Inside Visual Studio Code, open a terminal window by selecting **View** > **Terminal**, and execute the following code to install the packages and run the site
 
   ```bash
-  npm install
+  npm dev:install
   npm run dev
   ```
 
