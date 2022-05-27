@@ -16,7 +16,8 @@
 		"dbaeumer.vscode-eslint",
 		"mongodb.mongodb-vscode",
 		"ms-azuretools.vscode-azurefunctions",
-		"ms-azuretools.vscode-cosmosdb"
+		"ms-azuretools.vscode-cosmosdb",
+		"ms-azuretools.vscode-azurestaticwebapps"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
