@@ -8,9 +8,10 @@
       "methods": [
         "get",
         "post",
-        "put"
+        "put",
+        "delete"
       ],
-      "route": "tasks/{id?}"
+      "route": "lists/{listId}/items/{itemId?}"
     },
     {
       "type": "http",
