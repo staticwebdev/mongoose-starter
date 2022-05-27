@@ -11,8 +11,8 @@
   },
   "scripts": {
     "dev": "swa start http://localhost:3000 --api-location ./api --run 'react-scripts start'",
-    "build": "react-scripts build",
-    "postinstall": "cd api && npm install && func init --language javascript --worker-runtime node"
+    "dev:install": "npm install && cd api && npm install && func init --language javascript --worker-runtime node",
+    "build": "react-scripts build"
   },
   "browserslist": {
     "production": [
