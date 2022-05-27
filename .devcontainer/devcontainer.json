@@ -12,6 +12,7 @@
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
+		"ms-vscode.azure-account",
 		"dbaeumer.vscode-eslint",
 		"mongodb.mongodb-vscode",
 		"ms-azuretools.vscode-azurefunctions",
