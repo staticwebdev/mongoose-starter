@@ -6,6 +6,6 @@ test('basic test', async ({ page }) => {
   await page.click('a:has-text("Login")');
   await expect(page).toHaveURL('/.auth/login/github');
   await page.click('text=Login');
-  await page.waitForSelector('h4');
-  await expect(page.locator('h4')).toContainText('Select a list');
+  await page.waitForSelector('span');
+  await expect(page.locator('span')).toContainText('Welcome');
 })
