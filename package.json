@@ -10,6 +10,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "start": "swa start http://localhost:3000 --api-location ./api --run 'react-scripts start'",
     "dev": "swa start http://localhost:3000 --api-location ./api --run 'react-scripts start'",
     "dev:install": "npm install && cd api && npm install && func init --language javascript --worker-runtime node",
     "build": "react-scripts build",
