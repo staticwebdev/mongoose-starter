@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('basic test', async ({ page }) => {
+test('login from home page', async ({ page }) => {
   await page.goto('/');
   await page.waitForSelector('text=Login to see todo items');
   await page.click('a:has-text("Login")');
