@@ -3,6 +3,7 @@
     "@reduxjs/toolkit": "^1.8.1",
     "ajv": "^8.11.0",
     "axios": "^0.27.2",
+    "playwright": "^1.23.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-redux": "^8.0.1",
@@ -30,6 +31,6 @@
   },
   "devDependencies": {
     "@azure/static-web-apps-cli": "^1.0.1",
-    "@playwright/test": "^1.22.2"
+    "@playwright/test": "^1.23.0"
   }
 }
