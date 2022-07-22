@@ -1,5 +1,5 @@
 # Runs test on changes to main and nightly
-name: Playwright tests
+name: Playwright tests for dashboard
 
 # Controls when the workflow will run
 on:
@@ -14,7 +14,7 @@ on:
     
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-  
+
 jobs:
   playwright_tests:
     # Runs on an ubuntu runner
