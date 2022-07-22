@@ -3,6 +3,7 @@
     "@reduxjs/toolkit": "^1.8.1",
     "ajv": "^8.11.0",
     "axios": "^0.27.2",
+    "ci": "^2.2.0",
     "playwright": "^1.23.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
