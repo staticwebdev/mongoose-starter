@@ -28,7 +28,7 @@ async function configureMongoose(log) {
 
         await mongoose.connect(
             config.database.connectionString,
-            { dbName: config.database.databaseName }
+            { dbName: config.database.databaseName, useNewUrlParser: true }
         );
     }
     catch (err) {
