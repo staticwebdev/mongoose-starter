@@ -1,7 +1,5 @@
 # Static Web Apps - Mongoose starter
 
-[![Playwright tests](https://github.com/staticwebdev/mongoose-starter/actions/workflows/playwright-dashboard.yml/badge.svg)](https://github.com/staticwebdev/mongoose-starter/actions/workflows/playwright-dashboard.yml)
-
 This template is designed to be a starter for creating [React](https://reactjs.org) apps using [Azure Static Web Apps](https://docs.microsoft.com/azure/static-web-apps/overview?WT.mc_id=academic-45074-chrhar), with [Azure Cosmos DB API for Mongo DB](https://docs.microsoft.com/azure/cosmos-db/mongodb/mongodb-introduction?WT.mc_id=academic-45074-chrhar) as a database and a [Mongoose](https://mongoosejs.com/) client. It's built with the following:
 
 - Azure resources
